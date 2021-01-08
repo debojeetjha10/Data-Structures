@@ -1,25 +1,55 @@
 #include <bits/stdc++.h>
 using namespace std;
-class stack
+class Stack
 {
+int head;
+#define max 1000
+private:
+    int array[max];
 public:
-    int array[1000];
-    int top;
-    stack(){ top = -1;}
-    int  push(int val);
-    int pop(int val);
-    int top(int val);
-    bool isempty();
+    Stack(){ head = -1;}
+    bool  push(int val);
+    int pop();
+    int top();
+    bool isempty(){ return (head==-1)?true:false;}
+    bool isfull(){return (head==max)?true:false;}
 };
 
-int stack::push(int val)
+bool Stack::push(int val)
 {
-    if(top == 999){
+    if(isfull()){
         cout << "The stack is overflow" << endl;
+        return false;
+    }
+    else{
+        array[++head] = val;
+        return true;
+    }
+}
+int Stack::pop(){
+    if(isempty()){
+        cout << "The stack is empty!!!\n";
         return -1;
+    }
+    else{
+        return array[head--];
+    }
+}
+int Stack::top(){
+        if(isempty()){
+        cout << "The stack is empty!!!\n";
+        return -1;
+    }
+    else{
+        return array[head];
     }
 }
 
-stack::~stack()
-{
+int main(){
+    Stack q;
+    q.push(20);
+    q.push(50);
+    q.push(8);
+    cout<< q.pop() << " " << q.pop() << endl;
+    return 0;
 }
